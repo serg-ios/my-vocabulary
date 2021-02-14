@@ -1,0 +1,6 @@
+framework module Pods_MyVocabulary {
+  umbrella header "Pods-MyVocabulary-umbrella.h"
+
+  export *
+  module * { export * }
+}

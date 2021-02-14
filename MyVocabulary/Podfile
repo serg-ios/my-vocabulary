@@ -1,0 +1,8 @@
+platform :ios, '14.0'
+
+target 'MyVocabulary' do
+  use_frameworks!
+  pod 'GoogleSignIn'
+  pod 'GoogleAPIClientForREST/Drive'
+  pod 'CoreXLSX'
+end
