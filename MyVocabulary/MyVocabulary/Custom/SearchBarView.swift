@@ -11,19 +11,29 @@ struct SearchBarView: View {
     
     @Binding var searchString: String
     
-    var error: () -> String?
+    private var error: () -> String?
+    private var placeholder: String
+    private var accessibilityLabel: String
     
-    init(searchString: Binding<String>, error: @escaping () -> String?) {
+    init(
+        placeholder: String,
+        accessibilityLabel: String,
+        searchString: Binding<String>,
+        error: @escaping () -> String?
+    ) {
         self._searchString = searchString
         self.error = error
+        self.placeholder = placeholder
+        self.accessibilityLabel = accessibilityLabel
     }
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                TextField("Filter", text: $searchString)
+                TextField(placeholder, text: $searchString)
                     .font(.title2)
                     .padding(.leading)
+                    .accessibilityLabel(accessibilityLabel)
                 Button {
                     searchString = ""
                 } label: {
@@ -31,6 +41,7 @@ struct SearchBarView: View {
                         .frame(minWidth: 44, minHeight: 44)
                 }
                 .padding(.trailing, 8)
+                .accessibilityLabel("Delete filter.")
             }
             .padding([.top, .bottom], 2)
             .foregroundColor(Color("Dark Gray"))
@@ -52,7 +63,7 @@ struct SearchBarView: View {
 
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchBarView(searchString: .constant("")) {
+        SearchBarView(placeholder: "Filter", accessibilityLabel: "", searchString: .constant("")) {
             "Error"
         }
     }

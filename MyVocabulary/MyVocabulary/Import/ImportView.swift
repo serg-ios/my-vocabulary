@@ -38,7 +38,11 @@ struct ImportView: View {
                         Button {
                             viewModel.signOut()
                         } label: {
-                            Image(systemName: "person.crop.circle.badge.xmark")
+                            if UIAccessibility.isVoiceOverRunning {
+                                Text("Sign out")
+                            } else {
+                                Image(systemName: "person.crop.circle.badge.xmark")
+                            }
                         }
                     }
                 }

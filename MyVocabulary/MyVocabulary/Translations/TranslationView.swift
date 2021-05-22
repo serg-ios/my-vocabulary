@@ -42,6 +42,9 @@ struct TranslationView: View {
         .solidBackground()
         .padding()
         .onTapGesture { visible.toggle() }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(translation.translationInput) in \(translation.translationFrom), \(translation.translationOutput) in \(translation.translationTo) . Level \(translation.level).")
+        .accessibilityHint("Double tap to reveal the translation.")
     }
 }
 

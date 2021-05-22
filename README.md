@@ -20,3 +20,4 @@ This iOS app imports your Google Translate favorite translations to help you lea
 10. [Core Data in background](https://serg-ios.github.io/2021-03-06-my-vocabulary/#core-data-in-background)
 11. [Background and concurrent tasks in SwiftUI](https://serg-ios.github.io/2021-03-06-my-vocabulary/#background-and-concurrent-tasks-in-swiftui)
 12. [Accessibility - Dynamic Type](https://serg-ios.github.io/2021-03-06-my-vocabulary/#accessibility)
+13. [Accessibility - VoiceOver](https://serg-ios.github.io/2021-03-06-my-vocabulary/#voiceover)

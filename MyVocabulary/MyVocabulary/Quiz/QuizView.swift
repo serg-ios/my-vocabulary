@@ -23,12 +23,16 @@ struct QuizView: View {
                 if case .on(let questionIndex, let answerIndexes, _) = viewModel.status,
                    questionIndex < translations.count
                 {
+                    let translation = translations[questionIndex]
                     Spacer()
                     VStack(spacing: 16) {
-                        Text(translations[questionIndex].translationInput).font(.largeTitle).bold()
+                        Text(translation.translationInput).font(.largeTitle).bold()
                             .lineLimit(1)
-                        SegmentedProgressBar(level: translations[questionIndex].level).frame(height: 8)
-                    }.padding([.leading, .trailing, .bottom])
+                        SegmentedProgressBar(level: translation.level).frame(height: 8)
+                    }
+                    .padding([.leading, .trailing, .bottom])
+                    .accessibilityElement()
+                    .accessibilityLabel("\(translation.translationInput). Level \(translation.level).")
                     ForEach(answerIndexes, id: \.self) { answer in
                         Button {
                             viewModel.selectTranslation(at: answer, from: translations)
@@ -53,6 +57,7 @@ struct QuizView: View {
                     }
                     .padding(.top )
                     .padding(.bottom, 64)
+                    .accessibilityLabel("Next question.")
                 } else {
                     PlaceholderView(
                         image: Image(systemName: "die.face.4"),

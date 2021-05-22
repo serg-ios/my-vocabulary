@@ -10,7 +10,7 @@ import Foundation
 extension SpreadsheetView {
     class ViewModel: NSObject, ObservableObject {
 
-        enum Status {
+        enum Status: String {
             case loading
             case importable
             case imported

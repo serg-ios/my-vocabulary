@@ -28,6 +28,8 @@ struct PlaceholderView: View {
         }
         .scrollableLazyVStack
         .padding()
+        .accessibilityElement(children: .ignore)
+        .accessibility(label: text)
     }
 }
 

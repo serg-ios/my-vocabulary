@@ -23,11 +23,16 @@ struct TranslationsView: View {
             Group {
                 if case .loaded(let filteredTranslations) = viewModel.status {
                     VStack {
-                        SearchBarView(searchString: $viewModel.searchString.onChange {
-                            viewModel.updateStatus(for: translations)
-                        }, error: {
-                            filteredTranslations.isEmpty ? "Not found." : nil
-                        })
+                        SearchBarView(
+                            placeholder: "Filter",
+                            accessibilityLabel: "Filter translations by.",
+                            searchString: $viewModel.searchString.onChange {
+                                viewModel.updateStatus(for: translations)
+                            },
+                            error: {
+                                filteredTranslations.isEmpty ? "Not found." : nil
+                            }
+                        )
                         ForEach(filteredTranslations, id: \.self) { translation in
                             TranslationView(translation: translation)
                         }
@@ -42,7 +47,11 @@ struct TranslationsView: View {
                                     #selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil
                                 )
                             } label: {
-                                Image(systemName: "xmark.bin")
+                                if UIAccessibility.isVoiceOverRunning {
+                                    Text("Delete all imported translations")
+                                } else {
+                                    Image(systemName: "xmark.bin")
+                                }
                             }
                             .disabled(!viewModel.searchString.isEmpty)
                         }
