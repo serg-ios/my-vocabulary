@@ -12,11 +12,11 @@ struct SearchBarView: View {
     @Binding var searchString: String
     
     private var error: () -> String?
-    private var placeholder: String
+    private var placeholder: LocalizedStringKey
     private var accessibilityLabel: String
     
     init(
-        placeholder: String,
+        placeholder: LocalizedStringKey,
         accessibilityLabel: String,
         searchString: Binding<String>,
         error: @escaping () -> String?

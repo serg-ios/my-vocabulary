@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  MyVocabulary
+
+  Created by Sergio Rodríguez Rama on 22/5/21.
+  
+*/
+
+/* No comment provided by engineer. */
+"Delete all imported translations" = "Delete all imported translations";
+
+/* No comment provided by engineer. */
+"First, export your Google Translate favorite translations into a Google Drive spreadsheet." = "First, export your Google Translate favorite translations into a Google Drive spreadsheet.";
+
+/* No comment provided by engineer. */
+"Import" = "Import";
+
+/* No comment provided by engineer. */
+"Quiz" = "Quiz";
+
+/* No comment provided by engineer. */
+"Sign out" = "Sign out";
+
+/* No comment provided by engineer. */
+"Translations" = "Translations";
+
+/* No comment provided by engineer. */
+"You must have at least 4 translations to start the quiz." = "You must have at least 4 translations to start the quiz.";
+
+/* No comment provided by engineer. */
+"Filter" = "Filter";
