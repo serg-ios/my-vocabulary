@@ -6,26 +6,23 @@
   
 */
 
-/* No comment provided by engineer. */
 "Delete all imported translations" = "Delete all imported translations";
-
-/* No comment provided by engineer. */
 "First, export your Google Translate favorite translations into a Google Drive spreadsheet." = "First, export your Google Translate favorite translations into a Google Drive spreadsheet.";
-
-/* No comment provided by engineer. */
 "Import" = "Import";
-
-/* No comment provided by engineer. */
 "Quiz" = "Quiz";
-
-/* No comment provided by engineer. */
 "Sign out" = "Sign out";
-
-/* No comment provided by engineer. */
 "Translations" = "Translations";
-
-/* No comment provided by engineer. */
 "You must have at least 4 translations to start the quiz." = "You must have at least 4 translations to start the quiz.";
-
-/* No comment provided by engineer. */
 "Filter" = "Filter";
+"Spreadsheets" = "Spreadsheets";
+"Delete filter." = "Delete filter.";
+"%@ spreadsheet %@ with %@." = "%@ spreadsheet %@ with %@.";
+"%@. Level %d." = "%@. Level %d.";
+"Next question." = "Next question.";
+"%@ in %@, %@ in %@ . Level %d." = "%@ in %@, %@ in %@ . Level %d.";
+"Filter translations by." = "Filter translations by.";
+"Not found." = "Not found.";
+"Double tap to reveal the translation." = "Double tap to reveal the translation.";
+"Importable" = "Importable";
+"Imported" = "Imported";
+"Loading" = "Loading";

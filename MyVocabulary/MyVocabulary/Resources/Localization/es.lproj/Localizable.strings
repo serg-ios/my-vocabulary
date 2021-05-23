@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  MyVocabulary
+
+  Created by Sergio Rodríguez Rama on 22/5/21.
+  
+*/
+
+"Delete all imported translations" = "Borrar todas las traducciones importadas";
+"First, export your Google Translate favorite translations into a Google Drive spreadsheet." = "Primero, exporta tus traducciones favoritas de Google Translate a una hoja de cálculo de Google Drive.";
+"Import" = "Importar";
+"Quiz" = "Prueba";
+"Sign out" = "Cerrar sesión";
+"Translations" = "Traducciones";
+"You must have at least 4 translations to start the quiz." = "Hacen falta al menos 4 traducciones para empezar la prueba.";
+"Filter" = "Filtrar";
+"Spreadsheets" = "Hojas de cálculo";
+"Delete filter." = "Borrar filtro.";
+"%@ spreadsheet %@ with %@." = "%@ hoja de cálculo %@ con %@.";
+"%@. Level %d." = "%@. Nivel %d.";
+"Next question." = "Siguiente pregunta.";
+"%@ in %@, %@ in %@ . Level %d." = "%@ en %@, %@ en %@ . Nivel %d.";
+"Filter translations by." = "Filtrar traducciones por.";
+"Not found." = "Sin resultados.";
+"Double tap to reveal the translation." = "Pulsa dos veces para revelar la traducción.";
+"Importable" = "Importable";
+"Imported" = "Importada";
+"Loading" = "Cargando";

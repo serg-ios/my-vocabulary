@@ -9,11 +9,22 @@ import Foundation
 
 extension SpreadsheetView {
     class ViewModel: NSObject, ObservableObject {
-
+        
         enum Status: String {
             case loading
             case importable
             case imported
+            
+            var localized: String {
+                switch self {
+                case .importable:
+                    return NSLocalizedString("Importable", comment: "")
+                case .imported:
+                    return NSLocalizedString("Imported", comment: "")
+                case .loading:
+                    return NSLocalizedString("Loading", comment: "")
+                }
+            }
         }
 
         @Published var status: Status = .loading

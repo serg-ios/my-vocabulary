@@ -17,7 +17,7 @@ struct Spreadsheet {
 
     /// Text that expresses the number of translations that contains the spreadsheet.
     var numberOfTranslationsString: String {
-        String(format: "%d translations", translations.count).localizedUppercase
+        String(format: NSLocalizedString("%d translations", comment: ""), translations.count).localizedUppercase
     }
 
     /// Represents a translation inside a spreadsheet, not the Core Data entity, before it's stored in iCloud.
@@ -69,7 +69,8 @@ struct Spreadsheet {
             id: "0",
             name: "My favorite book",
             translations: [
-                .init(from: "english", to: "español", input: "hello", output: "hola")
+                .init(from: "english", to: "español", input: "hello", output: "hola"),
+                .init(from: "english", to: "español", input: "bye", output: "adiós")
             ]
         )
     }

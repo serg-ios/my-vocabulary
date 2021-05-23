@@ -47,7 +47,7 @@ struct SpreadsheetView: View {
         .onChange(of: translations, perform: viewModel.checkIfImported)
         .onAppear { viewModel.checkIfImported(translations: translations) }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel( "\(viewModel.status.rawValue) spreadsheet \(viewModel.spreadsheet.name) with \(viewModel.spreadsheet.numberOfTranslationsString).")
+        .accessibilityLabel( "\(viewModel.status.localized) spreadsheet \(viewModel.spreadsheet.name) with \(viewModel.spreadsheet.numberOfTranslationsString).")
         .accessibilityAction {
             viewModel.importTranslations()
         }
