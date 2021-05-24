@@ -22,3 +22,4 @@ This iOS app imports your Google Translate favorite translations to help you lea
 12. [Accessibility - Dynamic Type](https://serg-ios.github.io/2021-03-06-my-vocabulary/#accessibility)
 13. [Accessibility - VoiceOver](https://serg-ios.github.io/2021-03-06-my-vocabulary/#voiceover)
 14. [Internationalization and localization](https://serg-ios.github.io/2021-03-06-my-vocabulary/#internationalization-and-localization)
+15. [Spotlight](https://serg-ios.github.io/2021-03-06-my-vocabulary/#spotlight)

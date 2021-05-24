@@ -62,7 +62,7 @@ extension QuizView {
             } else {
                 translations[questionIndex].decreaseLevel()
             }
-            dataController.save()
+            dataController.update(translations[questionIndex])
         }
     }
 }

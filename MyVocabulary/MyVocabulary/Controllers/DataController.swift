@@ -7,6 +7,7 @@
 
 import CoreData
 import SwiftUI
+import CoreSpotlight
 
 class DataController: ObservableObject {
 
@@ -38,6 +39,24 @@ class DataController: ObservableObject {
             }
         }
     }
+    
+    // MARK: - Spotlight
+    
+    /// Updates a translation in CloudKit and adds it to Spotlight.
+    /// - Parameter translation: The translation that will be updated.
+    func update(_ translation: Translation) {
+        let translationID = translation.objectID.uriRepresentation().absoluteString
+        let attributeSet = CSSearchableItemAttributeSet(contentType: .text)
+        attributeSet.title = translation.translationInput
+        attributeSet.contentDescription = translation.translationOutput
+        let searchableItem = CSSearchableItem(
+            uniqueIdentifier: translationID,
+            domainIdentifier: "com.serg-ios.MyVocabulary",
+            attributeSet: attributeSet
+        )
+        CSSearchableIndex.default().indexSearchableItems([searchableItem])
+        save()
+    }
 
     // MARK: - Actions
 
@@ -54,12 +73,13 @@ class DataController: ObservableObject {
         container.viewContext.delete(object)
     }
 
-    /// Delete all the objects of a specific type from iCloud.
+    /// Delete all the objects of a specific type from iCloud and removes all Spotlight data.
     /// - Parameter objectType: The type of the objects that will be removed.
     func deleteAll(_ objectType: NSManagedObject.Type) {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = objectType.fetchRequest()
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         _ = try? container.viewContext.executeAndMergeChanges(using: batchDeleteRequest)
+        CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: ["com.serg-ios.MyVocabulary"])
     }
 
     /// Gives the number of elements fetched.
