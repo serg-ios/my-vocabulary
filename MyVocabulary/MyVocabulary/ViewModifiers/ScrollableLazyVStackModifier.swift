@@ -9,11 +9,13 @@ import Foundation
 import SwiftUI
 
 struct ScrollableLazyVStackModifier: ViewModifier {
+    
+    var showsIndicators: Bool
 
     // MARK: - ViewModifier methods
 
     func body(content: Content) -> some View {
-        ScrollView(showsIndicators: false) {
+        ScrollView(showsIndicators: showsIndicators) {
             LazyVStack {
                 content
             }
@@ -23,7 +25,7 @@ struct ScrollableLazyVStackModifier: ViewModifier {
 
 extension View {
     /// Wraps any view inside a vertically scrollable lazy stack.
-    var scrollableLazyVStack: some View {
-        self.modifier(ScrollableLazyVStackModifier())
+    func scrollableLazyVStack(showIndicators: Bool) -> some View {
+        self.modifier(ScrollableLazyVStackModifier(showsIndicators: showIndicators))
     }
 }

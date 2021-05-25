@@ -37,6 +37,17 @@
 		79B80E762640751D006EDE2A /* ImportView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B80E752640751D006EDE2A /* ImportView+ViewModel.swift */; };
 		79D806D9264D3B2900576434 /* QuizView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D806D8264D3B2800576434 /* QuizView+ViewModel.swift */; };
 		79D806E0264D3B8200576434 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D806DF264D3B8200576434 /* PlaceholderView.swift */; };
+		79E11397265D7ACE009C9C21 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E11396265D7ACE009C9C21 /* WidgetKit.framework */; };
+		79E11399265D7ACE009C9C21 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E11398265D7ACE009C9C21 /* SwiftUI.framework */; };
+		79E1139C265D7ACE009C9C21 /* MyVocabularyWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E1139B265D7ACE009C9C21 /* MyVocabularyWidget.swift */; };
+		79E1139E265D7ACF009C9C21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79E1139D265D7ACF009C9C21 /* Assets.xcassets */; };
+		79E113A2265D7ACF009C9C21 /* MyVocabularyWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 79E11395265D7ACE009C9C21 /* MyVocabularyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		79E113A9265D7C08009C9C21 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0B325F7B82200F959EA /* Main.xcdatamodeld */; };
+		79E113AC265D7C22009C9C21 /* Translation+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790F19B225FE3B7000A5A285 /* Translation+.swift */; };
+		79E113AF265D7C3E009C9C21 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0AF25F7B77D00F959EA /* DataController.swift */; };
+		79E113B2265D7C73009C9C21 /* NSManagedObjectContext+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0D225F7F6F500F959EA /* NSManagedObjectContext+.swift */; };
+		79E113BE265D8DF8009C9C21 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E4A0AC25F7B65300F959EA /* CloudKit.framework */; };
+		79E113C1265D95AD009C9C21 /* SegmentedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79250D262619E67A00E802A9 /* SegmentedProgressBar.swift */; };
 		79E4A0AD25F7B65300F959EA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E4A0AC25F7B65300F959EA /* CloudKit.framework */; };
 		79E4A0B025F7B77D00F959EA /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0AF25F7B77D00F959EA /* DataController.swift */; };
 		79E4A0B525F7B82200F959EA /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0B325F7B82200F959EA /* Main.xcdatamodeld */; };
@@ -45,6 +56,30 @@
 		79E8DEB026444C00003E146F /* ContentView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E8DEAF26444C00003E146F /* ContentView+ViewModel.swift */; };
 		79E8DEBB26448822003E146F /* SpreadsheetView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E8DEBA26448822003E146F /* SpreadsheetView+ViewModel.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		79E113A0265D7ACF009C9C21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 793C3FE825D9BAD000E630E6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 79E11394265D7ACD009C9C21;
+			remoteInfo = MyVocabularyWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		79E113A3265D7ACF009C9C21 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				79E113A2265D7ACF009C9C21 /* MyVocabularyWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		790F19B225FE3B7000A5A285 /* Translation+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Translation+.swift"; sourceTree = "<group>"; };
@@ -81,6 +116,13 @@
 		79B80E752640751D006EDE2A /* ImportView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImportView+ViewModel.swift"; sourceTree = "<group>"; };
 		79D806D8264D3B2800576434 /* QuizView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuizView+ViewModel.swift"; sourceTree = "<group>"; };
 		79D806DF264D3B8200576434 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		79E11395265D7ACE009C9C21 /* MyVocabularyWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyVocabularyWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		79E11396265D7ACE009C9C21 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		79E11398265D7ACE009C9C21 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		79E1139B265D7ACE009C9C21 /* MyVocabularyWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVocabularyWidget.swift; sourceTree = "<group>"; };
+		79E1139D265D7ACF009C9C21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		79E1139F265D7ACF009C9C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79E113BB265D8DF1009C9C21 /* MyVocabularyWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyVocabularyWidgetExtension.entitlements; sourceTree = "<group>"; };
 		79E4A0AA25F7B64D00F959EA /* MyVocabulary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyVocabulary.entitlements; sourceTree = "<group>"; };
 		79E4A0AC25F7B65300F959EA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		79E4A0AF25F7B77D00F959EA /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -101,6 +143,16 @@
 			files = (
 				6AA81EDED18DB0307D210BF1 /* Pods_MyVocabulary.framework in Frameworks */,
 				79E4A0AD25F7B65300F959EA /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79E11392265D7ACD009C9C21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79E113BE265D8DF8009C9C21 /* CloudKit.framework in Frameworks */,
+				79E11399265D7ACE009C9C21 /* SwiftUI.framework in Frameworks */,
+				79E11397265D7ACE009C9C21 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +193,9 @@
 		793C3FE725D9BAD000E630E6 = {
 			isa = PBXGroup;
 			children = (
+				79E113BB265D8DF1009C9C21 /* MyVocabularyWidgetExtension.entitlements */,
 				793C3FF225D9BAD000E630E6 /* MyVocabulary */,
+				79E1139A265D7ACE009C9C21 /* MyVocabularyWidget */,
 				793C3FF125D9BAD000E630E6 /* Products */,
 				0F7540BBC4528DB9B86A5224 /* Pods */,
 				7B5353964676F572BF9B53B0 /* Frameworks */,
@@ -152,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				793C3FF025D9BAD000E630E6 /* MyVocabulary.app */,
+				79E11395265D7ACE009C9C21 /* MyVocabularyWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,6 +341,16 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
+		79E1139A265D7ACE009C9C21 /* MyVocabularyWidget */ = {
+			isa = PBXGroup;
+			children = (
+				79E1139B265D7ACE009C9C21 /* MyVocabularyWidget.swift */,
+				79E1139D265D7ACF009C9C21 /* Assets.xcassets */,
+				79E1139F265D7ACF009C9C21 /* Info.plist */,
+			);
+			path = MyVocabularyWidget;
+			sourceTree = "<group>";
+		};
 		79E8DEB52644821E003E146F /* Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +376,8 @@
 			children = (
 				79E4A0AC25F7B65300F959EA /* CloudKit.framework */,
 				84E72093C65429F7A9ED2215 /* Pods_MyVocabulary.framework */,
+				79E11396265D7ACE009C9C21 /* WidgetKit.framework */,
+				79E11398265D7ACE009C9C21 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -328,15 +395,34 @@
 				793C3FEE25D9BAD000E630E6 /* Resources */,
 				C402C842B2D9BEBA2FDD9FF8 /* [CP] Embed Pods Frameworks */,
 				71465863D5C4D5D87DCAF2E1 /* [CP] Copy Pods Resources */,
+				79E113A3265D7ACF009C9C21 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				79E113A1265D7ACF009C9C21 /* PBXTargetDependency */,
 			);
 			name = MyVocabulary;
 			productName = MyVocabulary;
 			productReference = 793C3FF025D9BAD000E630E6 /* MyVocabulary.app */;
 			productType = "com.apple.product-type.application";
+		};
+		79E11394265D7ACD009C9C21 /* MyVocabularyWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79E113A6265D7AD0009C9C21 /* Build configuration list for PBXNativeTarget "MyVocabularyWidgetExtension" */;
+			buildPhases = (
+				79E11391265D7ACD009C9C21 /* Sources */,
+				79E11392265D7ACD009C9C21 /* Frameworks */,
+				79E11393265D7ACD009C9C21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyVocabularyWidgetExtension;
+			productName = MyVocabularyWidgetExtension;
+			productReference = 79E11395265D7ACE009C9C21 /* MyVocabularyWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -344,11 +430,14 @@
 		793C3FE825D9BAD000E630E6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					793C3FEF25D9BAD000E630E6 = {
 						CreatedOnToolsVersion = 12.2;
+					};
+					79E11394265D7ACD009C9C21 = {
+						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
@@ -367,6 +456,7 @@
 			projectRoot = "";
 			targets = (
 				793C3FEF25D9BAD000E630E6 /* MyVocabulary */,
+				79E11394265D7ACD009C9C21 /* MyVocabularyWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -382,6 +472,14 @@
 				793C3FFD25D9BAD100E630E6 /* Preview Assets.xcassets in Resources */,
 				793C3FFA25D9BAD100E630E6 /* Assets.xcassets in Resources */,
 				79B0E6F4265AB2AA00DFB501 /* Localizable.stringsdict in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		79E11393265D7ACD009C9C21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79E1139E265D7ACF009C9C21 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +581,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		79E11391265D7ACD009C9C21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79E113A9265D7C08009C9C21 /* Main.xcdatamodeld in Sources */,
+				79E113AF265D7C3E009C9C21 /* DataController.swift in Sources */,
+				79E1139C265D7ACE009C9C21 /* MyVocabularyWidget.swift in Sources */,
+				79E113AC265D7C22009C9C21 /* Translation+.swift in Sources */,
+				79E113B2265D7C73009C9C21 /* NSManagedObjectContext+.swift in Sources */,
+				79E113C1265D95AD009C9C21 /* SegmentedProgressBar.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		79E113A1265D7ACF009C9C21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 79E11394265D7ACD009C9C21 /* MyVocabularyWidgetExtension */;
+			targetProxy = 79E113A0265D7ACF009C9C21 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		793C3FFE25D9BAD100E630E6 /* LaunchScreen.storyboard */ = {
@@ -638,6 +757,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DFF8EE5DA91D899760CDF957 /* Pods-MyVocabulary.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MyVocabulary/Configuration/MyVocabulary.entitlements;
@@ -662,6 +782,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DECCF95D6496F01361B2A73F /* Pods-MyVocabulary.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MyVocabulary/Configuration/MyVocabulary.entitlements;
@@ -682,6 +803,52 @@
 			};
 			name = Release;
 		};
+		79E113A4265D7ACF009C9C21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MyVocabularyWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = MyVocabularyWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.serg-ios.MyVocabulary.MyVocabularyWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		79E113A5265D7ACF009C9C21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = MyVocabularyWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = MyVocabularyWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.serg-ios.MyVocabulary.MyVocabularyWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -699,6 +866,15 @@
 			buildConfigurations = (
 				793C400525D9BAD100E630E6 /* Debug */,
 				793C400625D9BAD100E630E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79E113A6265D7AD0009C9C21 /* Build configuration list for PBXNativeTarget "MyVocabularyWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79E113A4265D7ACF009C9C21 /* Debug */,
+				79E113A5265D7ACF009C9C21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

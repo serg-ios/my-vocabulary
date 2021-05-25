@@ -26,7 +26,7 @@ struct PlaceholderView: View {
                 .padding(.top)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .scrollableLazyVStack
+        .scrollableLazyVStack(showIndicators: false)
         .padding()
         .accessibilityElement(children: .ignore)
         .accessibility(label: text)

@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 import GoogleSignIn
 import GoogleAPIClientForREST
+import WidgetKit
 
 extension ImportView {
 
@@ -88,6 +89,7 @@ extension ImportView {
                     newTranslation.output = translation.output
                 }
                 try? context.save()
+                WidgetCenter.shared.reloadAllTimelines()
             }
         }
 

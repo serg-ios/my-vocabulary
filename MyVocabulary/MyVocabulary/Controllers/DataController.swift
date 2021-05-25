@@ -8,6 +8,7 @@
 import CoreData
 import SwiftUI
 import CoreSpotlight
+import WidgetKit
 
 class DataController: ObservableObject {
 
@@ -27,11 +28,19 @@ class DataController: ObservableObject {
 
     /// For testing and previewing purposes, we create a temporary in-memory database by writing to `/dev/null`
     /// so our data is destroyed after the app finishes running.
+    ///
+    /// To enable Core Data for the Widget, the container must store data in the shared group.
+    ///
     /// - Parameter inMemory: If  `true`, data will be temporary written in `/dev/null`, is `false` by default.
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "Main", managedObjectModel: Self.model)
         if inMemory {
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
+        } else {
+            let groupID = "group.com.serg-ios.MyVocabulary"
+            if let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupID) {
+                container.persistentStoreDescriptions.first?.url = url.appendingPathComponent("Main.sqlite")
+            }
         }
         container.loadPersistentStores { _, error in
             if let error = error {
@@ -60,10 +69,11 @@ class DataController: ObservableObject {
 
     // MARK: - Actions
 
-    /// Save model changes in iCloud.
+    /// Save model changes in iCloud and update the Widget.
     func save() {
         if container.viewContext.hasChanges {
             try? container.viewContext.save()
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
@@ -99,4 +109,12 @@ class DataController: ObservableObject {
         let viewContext = dataController.container.viewContext
         return dataController
     }()
+    
+    /// Fetches all the translations to be used by the widget.
+    /// - Returns: The translations, an empty array if they could not be fetched.
+    func translationsForWidget() -> [Translation] {
+        let request: NSFetchRequest<Translation> = Translation.fetchRequest()
+        request.sortDescriptors = []
+        return (try? container.viewContext.fetch(request)) ?? []
+    }
 }

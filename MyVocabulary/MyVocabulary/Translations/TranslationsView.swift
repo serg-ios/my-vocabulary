@@ -36,7 +36,7 @@ struct TranslationsView: View {
                         ForEach(filteredTranslations, id: \.self) { translation in
                             TranslationView(translation: translation)
                         }
-                        .scrollableLazyVStack
+                        .scrollableLazyVStack(showIndicators: true)
                     }
                     .accentColor(Color("Light Blue"))
                     .toolbar {

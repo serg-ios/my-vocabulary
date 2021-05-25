@@ -31,7 +31,7 @@ struct ImportView: View {
                     )
                     .padding()
                 }
-                .scrollableLazyVStack
+                .scrollableLazyVStack(showIndicators: false)
                 .navigationTitle("Spreadsheets")
                 .toolbar {
                     ToolbarItem {
