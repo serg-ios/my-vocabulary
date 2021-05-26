@@ -23,3 +23,5 @@ This iOS app imports your Google Translate favorite translations to help you lea
 13. [Accessibility - VoiceOver](https://serg-ios.github.io/2021-03-06-my-vocabulary/#voiceover)
 14. [Internationalization and localization](https://serg-ios.github.io/2021-03-06-my-vocabulary/#internationalization-and-localization)
 15. [Spotlight](https://serg-ios.github.io/2021-03-06-my-vocabulary/#spotlight)
+17. [Widgets](https://serg-ios.github.io/2021-03-06-my-vocabulary/#widgets)
+18. [Widgets - WidgetBundle](https://serg-ios.github.io/2021-03-06-my-vocabulary/#widgetbundle)

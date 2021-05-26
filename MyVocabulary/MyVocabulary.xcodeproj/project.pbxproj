@@ -48,6 +48,7 @@
 		79E113B2265D7C73009C9C21 /* NSManagedObjectContext+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0D225F7F6F500F959EA /* NSManagedObjectContext+.swift */; };
 		79E113BE265D8DF8009C9C21 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E4A0AC25F7B65300F959EA /* CloudKit.framework */; };
 		79E113C1265D95AD009C9C21 /* SegmentedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79250D262619E67A00E802A9 /* SegmentedProgressBar.swift */; };
+		79E113E9265E92B1009C9C21 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79B0E6E62659648500DFB501 /* Localizable.strings */; };
 		79E4A0AD25F7B65300F959EA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E4A0AC25F7B65300F959EA /* CloudKit.framework */; };
 		79E4A0B025F7B77D00F959EA /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0AF25F7B77D00F959EA /* DataController.swift */; };
 		79E4A0B525F7B82200F959EA /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0B325F7B82200F959EA /* Main.xcdatamodeld */; };
@@ -480,6 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79E1139E265D7ACF009C9C21 /* Assets.xcassets in Resources */,
+				79E113E9265E92B1009C9C21 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
