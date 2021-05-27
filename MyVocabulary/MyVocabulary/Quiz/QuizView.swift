@@ -68,6 +68,10 @@ struct QuizView: View {
             }
             .onChange(of: translations, perform: viewModel.updateStatus(_:))
             .onAppear { viewModel.updateStatus(translations) }
+            .onChange(of: viewModel.status, perform: { value in
+                guard case .on(let answer, _, let selected) = value, selected != nil, answer != selected else { return }
+                UINotificationFeedbackGenerator().notificationOccurred(.error)
+            })
         }
     }
     
