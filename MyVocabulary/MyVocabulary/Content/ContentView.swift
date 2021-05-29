@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var selectedView: String = String(describing: TranslationsView.self)
     @StateObject private var viewModel: ViewModel
     @EnvironmentObject private var googleController: GoogleController
     
@@ -17,7 +18,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        TabView {
+        TabView(selection: $selectedView) {
             TranslationsView(translations: $viewModel.translations, viewModel: .init(dataController: viewModel.dataController))
                 .tag(String(describing: TranslationsView.self))
                 .tabItem {
@@ -43,7 +44,17 @@ struct ContentView: View {
                 Text("Import")
             }
         }
+        .onChange(of: viewModel.openURL, perform: handleURL)
         .accentColor(Color("Light Blue"))
+    }
+    
+    func handleURL( _ url: URL?) {
+        DispatchQueue.main.async {
+            if url?.absoluteString == "MyVocabulary://startQuiz" {
+                selectedView = String(describing: QuizView.self)
+            }
+        }
+        viewModel.cleanOpenURL()
     }
 }
 

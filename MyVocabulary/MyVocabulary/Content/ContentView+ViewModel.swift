@@ -11,6 +11,7 @@ import Foundation
 extension ContentView {
     class ViewModel: NSObject, ObservableObject {
 
+        @Published var openURL: URL?
         @Published var translations: [Translation] = []
 
         let dataController: DataController
@@ -32,6 +33,9 @@ extension ContentView {
             translations = translationsController.fetchedObjects ?? []
         }
 
+        func cleanOpenURL() {
+            openURL = nil
+        }
     }
 }
 

@@ -49,6 +49,7 @@
 		79E113BE265D8DF8009C9C21 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E4A0AC25F7B65300F959EA /* CloudKit.framework */; };
 		79E113C1265D95AD009C9C21 /* SegmentedProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79250D262619E67A00E802A9 /* SegmentedProgressBar.swift */; };
 		79E113E9265E92B1009C9C21 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79B0E6E62659648500DFB501 /* Localizable.strings */; };
+		79E15BB72662689100F9EAE6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79E15BB92662689100F9EAE6 /* InfoPlist.strings */; };
 		79E4A0AD25F7B65300F959EA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79E4A0AC25F7B65300F959EA /* CloudKit.framework */; };
 		79E4A0B025F7B77D00F959EA /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0AF25F7B77D00F959EA /* DataController.swift */; };
 		79E4A0B525F7B82200F959EA /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0B325F7B82200F959EA /* Main.xcdatamodeld */; };
@@ -124,6 +125,8 @@
 		79E1139D265D7ACF009C9C21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79E1139F265D7ACF009C9C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79E113BB265D8DF1009C9C21 /* MyVocabularyWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyVocabularyWidgetExtension.entitlements; sourceTree = "<group>"; };
+		79E15BB82662689100F9EAE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		79E15BBA2662689300F9EAE6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		79E4A0AA25F7B64D00F959EA /* MyVocabulary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyVocabulary.entitlements; sourceTree = "<group>"; };
 		79E4A0AC25F7B65300F959EA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		79E4A0AF25F7B77D00F959EA /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -263,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				793C400125D9BAD100E630E6 /* Info.plist */,
+				79E15BB92662689100F9EAE6 /* InfoPlist.strings */,
 				79E4A0AA25F7B64D00F959EA /* MyVocabulary.entitlements */,
 			);
 			path = Configuration;
@@ -468,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79B0E6E42659648500DFB501 /* Localizable.strings in Resources */,
+				79E15BB72662689100F9EAE6 /* InfoPlist.strings in Resources */,
 				793C400025D9BAD100E630E6 /* LaunchScreen.storyboard in Resources */,
 				79A98CDF25EE897500C09C77 /* Colors.xcassets in Resources */,
 				793C3FFD25D9BAD100E630E6 /* Preview Assets.xcassets in Resources */,
@@ -632,6 +637,16 @@
 				79B0E6F8265AB2B000DFB501 /* en */,
 			);
 			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
+		79E15BB92662689100F9EAE6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79E15BB82662689100F9EAE6 /* en */,
+				79E15BBA2662689300F9EAE6 /* es */,
+			);
+			name = InfoPlist.strings;
+			path = ../../../../../..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

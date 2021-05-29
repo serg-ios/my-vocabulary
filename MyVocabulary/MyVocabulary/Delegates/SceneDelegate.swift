@@ -11,6 +11,10 @@ import GoogleSignIn
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    private lazy var contentViewModel: ContentView.ViewModel = {
+        .init(dataController: dataController)
+    }()
+    
     var window: UIWindow?
     let dataController = DataController()
     let googleController = (UIApplication.shared.delegate as! AppDelegate).googleSignDelegate
@@ -20,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        let contentView = ContentView(viewModel: .init(dataController: dataController))
+        let contentView = ContentView(viewModel: contentViewModel)
             .environmentObject(googleController)
             .onReceive(
                 NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification),
@@ -38,6 +42,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func save(_ note: Notification) {
         dataController.save()
+    }
+    
+    // MARK: - UIWindowSceneDelegate methods
+    
+    func windowScene(
+        _ windowScene: UIWindowScene,
+        performActionFor shortcutItem: UIApplicationShortcutItem,
+        completionHandler: @escaping (Bool) -> Void
+    ) {
+        contentViewModel.openURL = URL(string: shortcutItem.type)
     }
 }
 
