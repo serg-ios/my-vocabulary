@@ -24,6 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
+        if let shortcurtItemType = connectionOptions.shortcutItem?.type, let openURL = URL(string: shortcurtItemType) {
+            contentViewModel.openURL = openURL
+        }
         let contentView = ContentView(viewModel: contentViewModel)
             .environmentObject(googleController)
             .onReceive(

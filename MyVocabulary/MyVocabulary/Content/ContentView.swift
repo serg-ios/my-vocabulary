@@ -45,18 +45,25 @@ struct ContentView: View {
             }
         }
         .onChange(of: viewModel.openURL, perform: handleURL)
+        .onAppear(perform: handleOnAppear)
         .accentColor(Color("Light Blue"))
     }
     
-    func handleURL( _ url: URL?) {
-        DispatchQueue.main.async {
-            if url?.absoluteString == "MyVocabulary://startQuiz" {
-                selectedView = String(describing: QuizView.self)
-            }
+    // MARK: - Private methods
+    
+    private func handleURL( _ url: URL? = nil) {
+        if url?.absoluteString == "MyVocabulary://startQuiz" {
+            selectedView = String(describing: QuizView.self)
         }
         viewModel.cleanOpenURL()
     }
+    
+    private func handleOnAppear() {
+        handleURL(viewModel.openURL)
+    }
 }
+
+// MARK: - Preview
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
