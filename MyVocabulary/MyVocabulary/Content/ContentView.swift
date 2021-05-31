@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var selectedView: String = String(describing: TranslationsView.self)
+    private let siriStartQuiz = "com.serg-ios.MyVocabulary.startQuiz"
+    private let quickActionStartQuiz = "MyVocabulary://startQuiz"
+    
+    @State private var activity: NSUserActivity?
+    @State private var selectedView: String = String(describing: TranslationsView.self)
     @StateObject private var viewModel: ViewModel
     @EnvironmentObject private var googleController: GoogleController
     
@@ -48,18 +52,32 @@ struct ContentView: View {
         .onAppear(perform: handleOnAppear)
         .accentColor(Color("Light Blue"))
     }
+}
+
+// MARK: - Private methods
+
+private extension ContentView {
+    func registerSiriShortcut() {
+        activity = NSUserActivity(activityType: siriStartQuiz)
+        activity?.title = NSLocalizedString("Start quiz", comment: "")
+        activity?.isEligibleForSearch = true
+        activity?.isEligibleForPrediction = true
+        activity?.becomeCurrent()
+    }
     
-    // MARK: - Private methods
-    
-    private func handleURL( _ url: URL? = nil) {
-        if url?.absoluteString == "MyVocabulary://startQuiz" {
+    func handleURL( _ url: URL? = nil) {
+        switch url?.absoluteString {
+        case siriStartQuiz, quickActionStartQuiz:
             selectedView = String(describing: QuizView.self)
+        default:
+            return
         }
         viewModel.cleanOpenURL()
     }
     
-    private func handleOnAppear() {
+    func handleOnAppear() {
         handleURL(viewModel.openURL)
+        registerSiriShortcut()
     }
 }
 

@@ -26,6 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         if let shortcurtItemType = connectionOptions.shortcutItem?.type, let openURL = URL(string: shortcurtItemType) {
             contentViewModel.openURL = openURL
+        } else if let activityType = connectionOptions.userActivities.first?.activityType, let url = URL(string: activityType) {
+            contentViewModel.openURL = url
         }
         let contentView = ContentView(viewModel: contentViewModel)
             .environmentObject(googleController)
@@ -55,6 +57,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         completionHandler: @escaping (Bool) -> Void
     ) {
         contentViewModel.openURL = URL(string: shortcutItem.type)
+    }
+    
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        print(userActivity)
+        print(userActivity.activityType)
+        contentViewModel.openURL = URL(string: userActivity.activityType)
     }
 }
 
