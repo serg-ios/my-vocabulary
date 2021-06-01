@@ -9,9 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     
-    private let siriStartQuiz = "com.serg-ios.MyVocabulary.startQuiz"
-    private let quickActionStartQuiz = "MyVocabulary://startQuiz"
-    
     @State private var activity: NSUserActivity?
     @State private var selectedView: String = String(describing: TranslationsView.self)
     @StateObject private var viewModel: ViewModel
@@ -48,7 +45,7 @@ struct ContentView: View {
                 Text("Import")
             }
         }
-        .onChange(of: viewModel.openURL, perform: handleURL)
+        .onChange(of: viewModel.externalLauncher, perform: handleExternalLauncher)
         .onAppear(perform: handleOnAppear)
         .accentColor(Color("Light Blue"))
     }
@@ -58,25 +55,25 @@ struct ContentView: View {
 
 private extension ContentView {
     func registerSiriShortcut() {
-        activity = NSUserActivity(activityType: siriStartQuiz)
+        activity = NSUserActivity(activityType: ExternalLauncher.siriShortcut.rawValue)
         activity?.title = NSLocalizedString("Start quiz", comment: "")
         activity?.isEligibleForSearch = true
         activity?.isEligibleForPrediction = true
         activity?.becomeCurrent()
     }
     
-    func handleURL( _ url: URL? = nil) {
-        switch url?.absoluteString {
-        case siriStartQuiz, quickActionStartQuiz:
+    func handleExternalLauncher( _ externalLauncher: ExternalLauncher? = nil) {
+        switch externalLauncher {
+        case .siriShortcut, .quickAction, .spotlight, .multipleTranslationsWidget, .randomTranslationWidget:
             selectedView = String(describing: QuizView.self)
         default:
-            return
+            break
         }
-        viewModel.cleanOpenURL()
+        viewModel.cleanExternalLauncher()
     }
     
     func handleOnAppear() {
-        handleURL(viewModel.openURL)
+        handleExternalLauncher(viewModel.externalLauncher)
         registerSiriShortcut()
     }
 }

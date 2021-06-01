@@ -10,8 +10,9 @@ import Foundation
 
 extension ContentView {
     class ViewModel: NSObject, ObservableObject {
-
-        @Published var openURL: URL?
+        
+        /// Determines which iOS element launched the app: siri shortcut, quick action, widget, spotlight...
+        @Published var externalLauncher: ExternalLauncher?
         @Published var translations: [Translation] = []
 
         let dataController: DataController
@@ -32,9 +33,10 @@ extension ContentView {
             try? translationsController.performFetch()
             translations = translationsController.fetchedObjects ?? []
         }
-
-        func cleanOpenURL() {
-            openURL = nil
+        
+        /// Sets the external caller to `nil`.
+        func cleanExternalLauncher() {
+            externalLauncher = nil
         }
     }
 }

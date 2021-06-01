@@ -24,10 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        if let shortcurtItemType = connectionOptions.shortcutItem?.type, let openURL = URL(string: shortcurtItemType) {
-            contentViewModel.openURL = openURL
-        } else if let activityType = connectionOptions.userActivities.first?.activityType, let url = URL(string: activityType) {
-            contentViewModel.openURL = url
+        if let shortcutItem = connectionOptions.shortcutItem {
+            contentViewModel.externalLauncher = ExternalLauncher(rawValue: shortcutItem.type)
+        } else if let userActivity = connectionOptions.userActivities.first {
+            contentViewModel.externalLauncher = ExternalLauncher(rawValue: userActivity.activityType)
         }
         let contentView = ContentView(viewModel: contentViewModel)
             .environmentObject(googleController)
@@ -56,13 +56,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         performActionFor shortcutItem: UIApplicationShortcutItem,
         completionHandler: @escaping (Bool) -> Void
     ) {
-        contentViewModel.openURL = URL(string: shortcutItem.type)
+        contentViewModel.externalLauncher = ExternalLauncher(rawValue: shortcutItem.type)
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        print(userActivity)
-        print(userActivity.activityType)
-        contentViewModel.openURL = URL(string: userActivity.activityType)
+        contentViewModel.externalLauncher = ExternalLauncher(rawValue: userActivity.activityType)
     }
 }
 
