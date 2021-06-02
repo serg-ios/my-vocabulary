@@ -66,6 +66,17 @@ class DataController: ObservableObject {
         CSSearchableIndex.default().indexSearchableItems([searchableItem])
         save()
     }
+    
+    /// Tries to obtain a stored translation with its object ID.
+    /// - Parameter uniqueIdentifier: The object ID of the managed object, a translation in this case.
+    /// - Returns: The translation that has that object ID.
+    func translation(with uniqueIdentifier: String) -> Translation? {
+        guard let url = URL(string: uniqueIdentifier),
+              let id = container.persistentStoreCoordinator.managedObjectID(forURIRepresentation: url) else {
+            return nil
+        }
+        return try? container.viewContext.existingObject(with: id) as? Translation
+    }
 
     // MARK: - Actions
 

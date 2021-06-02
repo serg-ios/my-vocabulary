@@ -55,7 +55,7 @@ struct ContentView: View {
 
 private extension ContentView {
     func registerSiriShortcut() {
-        activity = NSUserActivity(activityType: ExternalLauncher.siriShortcut.rawValue)
+        activity = NSUserActivity(activityType: ExternalLauncher.siriShortcut.string)
         activity?.title = NSLocalizedString("Start quiz", comment: "")
         activity?.isEligibleForSearch = true
         activity?.isEligibleForPrediction = true

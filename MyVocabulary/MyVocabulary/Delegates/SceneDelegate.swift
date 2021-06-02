@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import GoogleSignIn
+import CoreSpotlight
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -25,9 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         if let shortcutItem = connectionOptions.shortcutItem {
-            contentViewModel.externalLauncher = ExternalLauncher(rawValue: shortcutItem.type)
+            contentViewModel.externalLauncher = ExternalLauncher(shortcutItem.type)
         } else if let userActivity = connectionOptions.userActivities.first {
-            contentViewModel.externalLauncher = ExternalLauncher(rawValue: userActivity.activityType)
+            contentViewModel.externalLauncher = ExternalLauncher(
+                userActivity.activityType,
+                translation: translation(from: userActivity)
+            )
         }
         let contentView = ContentView(viewModel: contentViewModel)
             .environmentObject(googleController)
@@ -56,11 +60,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         performActionFor shortcutItem: UIApplicationShortcutItem,
         completionHandler: @escaping (Bool) -> Void
     ) {
-        contentViewModel.externalLauncher = ExternalLauncher(rawValue: shortcutItem.type)
+        contentViewModel.externalLauncher = ExternalLauncher(shortcutItem.type)
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        contentViewModel.externalLauncher = ExternalLauncher(rawValue: userActivity.activityType)
+        contentViewModel.externalLauncher = ExternalLauncher(
+            userActivity.activityType,
+            translation: translation(from: userActivity)
+        )
+    }
+}
+
+// MARK: - Private methods
+
+private extension SceneDelegate {
+    func translation(from userActivity: NSUserActivity) -> Translation? {
+        if let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
+            return dataController.translation(with: uniqueIdentifier)
+        }
+        return nil
     }
 }
 

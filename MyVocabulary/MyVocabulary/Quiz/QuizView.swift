@@ -67,16 +67,27 @@ struct QuizView: View {
                 }
             }
             .onChange(of: translations, perform: viewModel.updateStatus(_:))
-            .onAppear { viewModel.updateStatus(translations) }
+            .onAppear(perform: handleOnAppear)
             .onChange(of: viewModel.status, perform: { value in
                 guard case .on(let answer, _, let selected) = value, selected != nil, answer != selected else { return }
                 UINotificationFeedbackGenerator().notificationOccurred(.error)
             })
         }
     }
+}
+
+// MARK: - Private methods
+
+private extension QuizView {
+    func handleOnAppear() {
+        if let translation = viewModel.initialTranslation {
+            viewModel.request(translation: translation, in: translations)
+        } else {
+            viewModel.updateStatus(translations)
+        }
+    }
     
-    
-    private func color(for answerIndex: Int) -> Color {
+    func color(for answerIndex: Int) -> Color {
         if case .on(let questionIndex, _, let selectedIndex) = viewModel.status, selectedIndex != nil {
             if answerIndex == questionIndex {
                 return .green

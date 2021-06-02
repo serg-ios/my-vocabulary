@@ -34,11 +34,17 @@ extension QuizView {
         private let numberOfAnswers = 4
         private let dataController: DataController
         
-        init(dataController: DataController) {
+        /// The quiz should start with this translation.
+        let initialTranslation: Translation?
+        
+        init(dataController: DataController, initialTranslation: Translation? = nil) {
             self.dataController = dataController
+            self.initialTranslation = initialTranslation
             super.init()
         }
         
+        /// Selects a new translation randomly, among all the available translations.
+        /// - Parameter translations: The available translations among which the random translation will be chosen.
         func updateStatus(_ translations: [Translation]) {
             guard translations.count >= numberOfAnswers else {
                 status = .off
@@ -52,6 +58,10 @@ extension QuizView {
             status = .on(questionIndex: questionIndex, answerIndexes: answerIndexes.shuffled(), selectedIndex: nil)
         }
         
+        /// Receives an answer and updates the status accordingly to the result of the answer.
+        /// - Parameters:
+        ///   - selectedIndex: The index of the selected answer.
+        ///   - translations: The array of translations, needed to check if the answer is correct, given all the indexes.
         func selectTranslation(at selectedIndex: Int, from translations: [Translation]) {
             guard case .on(let questionIndex, let answerIndexes, nil) = status else {
                 return
@@ -63,6 +73,20 @@ extension QuizView {
                 translations[questionIndex].decreaseLevel()
             }
             dataController.update(translations[questionIndex])
+        }
+        
+        /// Requests a specific translation, instead of doing it randomly.
+        /// - Parameters:
+        ///   - translation: The translation that should be requested in the quiz.
+        ///   - translations: The array of translations that are being requested in the quiz.
+        func request(translation: Translation, in translations: [Translation]) {
+            guard let questionIndex = translations.firstIndex(of: translation) else { return }
+            var answerIndexes = Set<Int>()
+            answerIndexes.insert(questionIndex)
+            while answerIndexes.count < numberOfAnswers {
+                answerIndexes.insert(Int.random(in: 0..<translations.count))
+            }
+            status = .on(questionIndex: questionIndex, answerIndexes: answerIndexes.shuffled(), selectedIndex: nil)
         }
     }
 }
