@@ -18,6 +18,13 @@ struct ContentView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
+    var quizInitialTranslation: Translation? {
+        if case .spotlight(let translation) = viewModel.externalLauncher {
+            return translation
+        }
+        return nil
+    }
+    
     var body: some View {
         TabView(selection: $selectedView) {
             TranslationsView(translations: $viewModel.translations, viewModel: .init(dataController: viewModel.dataController))
@@ -26,7 +33,11 @@ struct ContentView: View {
                     Image(systemName: "text.book.closed")
                     Text("Translations")
                 }
-            QuizView(translations: $viewModel.translations, viewModel: .init(dataController: viewModel.dataController))
+            QuizView(
+                translations: $viewModel.translations,
+                externalLauncher: $viewModel.externalLauncher,
+                viewModel: .init(dataController: viewModel.dataController)
+            )
                 .tag(String(describing: QuizView.self))
                 .tabItem {
                     Image(systemName: "gamecontroller")
@@ -83,7 +94,7 @@ private extension ContentView {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let googleController = (UIApplication.shared.delegate as! AppDelegate).googleSignDelegate
-        ContentView(viewModel: .init(dataController: .preview))
+        ContentView(viewModel: .init(dataController: .preview, externalLauncher: .quickAction))
             .environmentObject(googleController)
     }
 }

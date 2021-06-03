@@ -34,12 +34,8 @@ extension QuizView {
         private let numberOfAnswers = 4
         private let dataController: DataController
         
-        /// The quiz should start with this translation.
-        let initialTranslation: Translation?
-        
-        init(dataController: DataController, initialTranslation: Translation? = nil) {
+        init(dataController: DataController) {
             self.dataController = dataController
-            self.initialTranslation = initialTranslation
             super.init()
         }
         

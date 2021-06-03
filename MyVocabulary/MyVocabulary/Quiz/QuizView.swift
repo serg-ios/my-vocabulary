@@ -9,13 +9,23 @@ import SwiftUI
 
 struct QuizView: View {
     
+    @Binding private var externalLauncher: ExternalLauncher
     @Binding private var translations: [Translation]
     @StateObject private var viewModel: ViewModel
     
-    init(translations: Binding<[Translation]>, viewModel: ViewModel) {
+    // MARK: - Init
+    
+    init(
+        translations: Binding<[Translation]>,
+        externalLauncher: Binding<ExternalLauncher>,
+        viewModel: ViewModel
+    ) {
         self._translations = translations
+        self._externalLauncher = externalLauncher
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
+    
+    // MARK: - Body
     
     var body: some View {
         NavigationView {
@@ -72,6 +82,7 @@ struct QuizView: View {
                 guard case .on(let answer, _, let selected) = value, selected != nil, answer != selected else { return }
                 UINotificationFeedbackGenerator().notificationOccurred(.error)
             })
+            .onChange(of: externalLauncher, perform: handleOnChange(externalLauncher:))
         }
     }
 }
@@ -79,14 +90,25 @@ struct QuizView: View {
 // MARK: - Private methods
 
 private extension QuizView {
+    
+    /// This method handles all the actions that are run in the appearance of the view.
     func handleOnAppear() {
-        if let translation = viewModel.initialTranslation {
+        if case .spotlight(let tr) = externalLauncher, let translation = tr {
             viewModel.request(translation: translation, in: translations)
         } else {
             viewModel.updateStatus(translations)
         }
     }
     
+    func handleOnChange(externalLauncher: ExternalLauncher?) {
+        if case .spotlight(let tr) = externalLauncher, let translation = tr {
+            viewModel.request(translation: translation, in: translations)
+        }
+    }
+    
+    /// Correct answers will have a color and incorrect answers another.
+    /// - Parameter answerIndex: The index of the answer selected by the user.
+    /// - Returns: The color that will be applied to the answer.
     func color(for answerIndex: Int) -> Color {
         if case .on(let questionIndex, _, let selectedIndex) = viewModel.status, selectedIndex != nil {
             if answerIndex == questionIndex {
@@ -113,6 +135,7 @@ struct QuizView_Previews: PreviewProvider {
                     .example(viewContext: dataController.container.viewContext, input: "4", output: "04", level: 4)
                 ]
             ),
+            externalLauncher: .constant(.quickAction),
             viewModel: .init(dataController: dataController)
         )
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)

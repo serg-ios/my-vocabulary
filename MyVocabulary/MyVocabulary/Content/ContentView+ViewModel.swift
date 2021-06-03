@@ -12,13 +12,14 @@ extension ContentView {
     class ViewModel: NSObject, ObservableObject {
         
         /// Determines which iOS element launched the app: siri shortcut, quick action, widget, spotlight...
-        @Published var externalLauncher: ExternalLauncher?
+        @Published var externalLauncher: ExternalLauncher
+        /// All the fetched translations that will be shared by all the views.
         @Published var translations: [Translation] = []
 
         let dataController: DataController
         private var translationsController: NSFetchedResultsController<Translation>
 
-        init(dataController: DataController) {
+        init(dataController: DataController, externalLauncher: ExternalLauncher) {
             self.dataController = dataController
             let request: NSFetchRequest<Translation> = Translation.fetchRequest()
             request.sortDescriptors = []
@@ -28,6 +29,7 @@ extension ContentView {
                 sectionNameKeyPath: nil,
                 cacheName: nil
             )
+            self.externalLauncher = externalLauncher
             super.init()
             translationsController.delegate = self
             try? translationsController.performFetch()
@@ -36,7 +38,7 @@ extension ContentView {
         
         /// Sets the external caller to `nil`.
         func cleanExternalLauncher() {
-            externalLauncher = nil
+            externalLauncher = .quickAction
         }
     }
 }

@@ -11,14 +11,22 @@ import GoogleSignIn
 import CoreSpotlight
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
+    /// View model of the content view, is necessary because the external launcher must be setted.
     private lazy var contentViewModel: ContentView.ViewModel = {
-        .init(dataController: dataController)
+        .init(dataController: dataController, externalLauncher: externalLauncher)
     }()
     
-    var window: UIWindow?
+    var externalLauncher: ExternalLauncher = .quickAction
+    
+    /// Handles iCloud data.
     let dataController = DataController()
+    /// Handles Google Sign In, spreadsheets' download and parsing.
     let googleController = (UIApplication.shared.delegate as! AppDelegate).googleSignDelegate
+    
+    // MARK: - Scene
+    
+    var window: UIWindow?
     
     func scene(
         _ scene: UIScene,
@@ -26,12 +34,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         if let shortcutItem = connectionOptions.shortcutItem {
-            contentViewModel.externalLauncher = ExternalLauncher(shortcutItem.type)
+            externalLauncher = ExternalLauncher(shortcutItem.type)!
         } else if let userActivity = connectionOptions.userActivities.first {
-            contentViewModel.externalLauncher = ExternalLauncher(
+            externalLauncher = ExternalLauncher(
                 userActivity.activityType,
                 translation: translation(from: userActivity)
-            )
+            )!
         }
         let contentView = ContentView(viewModel: contentViewModel)
             .environmentObject(googleController)
@@ -60,14 +68,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         performActionFor shortcutItem: UIApplicationShortcutItem,
         completionHandler: @escaping (Bool) -> Void
     ) {
-        contentViewModel.externalLauncher = ExternalLauncher(shortcutItem.type)
+        contentViewModel.externalLauncher = ExternalLauncher(shortcutItem.type)!
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         contentViewModel.externalLauncher = ExternalLauncher(
             userActivity.activityType,
             translation: translation(from: userActivity)
-        )
+        )!
     }
 }
 
