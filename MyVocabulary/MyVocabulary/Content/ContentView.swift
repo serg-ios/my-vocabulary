@@ -19,7 +19,9 @@ struct ContentView: View {
     }
     
     var quizInitialTranslation: Translation? {
-        if case .spotlight(let translation) = viewModel.externalLauncher {
+        if case .spotlight(let action) = viewModel.appLauncher,
+           case .startQuiz(let transl) = action,
+           let translation = transl {
             return translation
         }
         return nil
@@ -35,14 +37,14 @@ struct ContentView: View {
                 }
             QuizView(
                 translations: $viewModel.translations,
-                externalLauncher: $viewModel.externalLauncher,
+                appLauncher: $viewModel.appLauncher,
                 viewModel: .init(dataController: viewModel.dataController)
             )
-                .tag(String(describing: QuizView.self))
-                .tabItem {
-                    Image(systemName: "gamecontroller")
-                    Text("Quiz")
-                }
+            .tag(String(describing: QuizView.self))
+            .tabItem {
+                Image(systemName: "gamecontroller")
+                Text("Quiz")
+            }
             ImportView(
                 translations: $viewModel.translations,
                 viewModel: .init(
@@ -56,7 +58,7 @@ struct ContentView: View {
                 Text("Import")
             }
         }
-        .onChange(of: viewModel.externalLauncher, perform: handleExternalLauncher)
+        .onChange(of: viewModel.appLauncher, perform: handleAppLauncher)
         .onAppear(perform: handleOnAppear)
         .accentColor(Color("Light Blue"))
     }
@@ -66,25 +68,24 @@ struct ContentView: View {
 
 private extension ContentView {
     func registerSiriShortcut() {
-        activity = NSUserActivity(activityType: ExternalLauncher.siriShortcut.string)
+        activity = NSUserActivity(activityType: "com.serg-ios.MyVocabulary.startQuiz")
         activity?.title = NSLocalizedString("Start quiz", comment: "")
         activity?.isEligibleForSearch = true
         activity?.isEligibleForPrediction = true
         activity?.becomeCurrent()
     }
     
-    func handleExternalLauncher( _ externalLauncher: ExternalLauncher? = nil) {
-        switch externalLauncher {
-        case .siriShortcut, .quickAction, .spotlight, .multipleTranslationsWidget, .randomTranslationWidget:
+    func handleAppLauncher( _ appLauncher: AppLauncher? = nil) {
+        switch appLauncher {
+        case .siri, .quick, .spotlight, .widget:
             selectedView = String(describing: QuizView.self)
         default:
             break
         }
-        viewModel.cleanExternalLauncher()
     }
     
     func handleOnAppear() {
-        handleExternalLauncher(viewModel.externalLauncher)
+        handleAppLauncher(viewModel.appLauncher)
         registerSiriShortcut()
     }
 }
@@ -94,7 +95,7 @@ private extension ContentView {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let googleController = (UIApplication.shared.delegate as! AppDelegate).googleSignDelegate
-        ContentView(viewModel: .init(dataController: .preview, externalLauncher: .quickAction))
+        ContentView(viewModel: .init(dataController: .preview, appLauncher: nil))
             .environmentObject(googleController)
     }
 }

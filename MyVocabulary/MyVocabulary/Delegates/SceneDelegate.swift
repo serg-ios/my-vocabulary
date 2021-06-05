@@ -14,10 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     /// View model of the content view, is necessary because the external launcher must be setted.
     private lazy var contentViewModel: ContentView.ViewModel = {
-        .init(dataController: dataController, externalLauncher: externalLauncher)
+        .init(dataController: dataController, appLauncher: appLauncher)
     }()
     
-    var externalLauncher: ExternalLauncher = .quickAction
+    var appLauncher: AppLauncher?
     
     /// Handles iCloud data.
     let dataController = DataController()
@@ -34,9 +34,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         if let shortcutItem = connectionOptions.shortcutItem {
-            externalLauncher = ExternalLauncher(shortcutItem.type)!
+            appLauncher = AppLauncher(shortcutItem.type)!
         } else if let userActivity = connectionOptions.userActivities.first {
-            externalLauncher = ExternalLauncher(
+            appLauncher = AppLauncher(
                 userActivity.activityType,
                 translation: translation(from: userActivity)
             )!
@@ -68,14 +68,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         performActionFor shortcutItem: UIApplicationShortcutItem,
         completionHandler: @escaping (Bool) -> Void
     ) {
-        contentViewModel.externalLauncher = ExternalLauncher(shortcutItem.type)!
+        print("APPLAUNCH: windowScene performActionFor")
+        contentViewModel.appLauncher = AppLauncher(shortcutItem.type)!
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        contentViewModel.externalLauncher = ExternalLauncher(
+        contentViewModel.appLauncher = AppLauncher(
             userActivity.activityType,
             translation: translation(from: userActivity)
-        )!
+        )
+        print("APPLAUNCH: scene userActivity")
     }
 }
 

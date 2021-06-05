@@ -9,7 +9,9 @@ import SwiftUI
 
 struct QuizView: View {
     
-    @Binding private var externalLauncher: ExternalLauncher
+    @State private var onAppearAlreadyCalled: Bool = false
+    
+    @Binding private var appLauncher: AppLauncher?
     @Binding private var translations: [Translation]
     @StateObject private var viewModel: ViewModel
     
@@ -17,11 +19,11 @@ struct QuizView: View {
     
     init(
         translations: Binding<[Translation]>,
-        externalLauncher: Binding<ExternalLauncher>,
+        appLauncher: Binding<AppLauncher?>,
         viewModel: ViewModel
     ) {
         self._translations = translations
-        self._externalLauncher = externalLauncher
+        self._appLauncher = appLauncher
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
     
@@ -82,7 +84,7 @@ struct QuizView: View {
                 guard case .on(let answer, _, let selected) = value, selected != nil, answer != selected else { return }
                 UINotificationFeedbackGenerator().notificationOccurred(.error)
             })
-            .onChange(of: externalLauncher, perform: handleOnChange(externalLauncher:))
+            .onChange(of: appLauncher, perform: handleOnChange(appLauncher:))
         }
     }
 }
@@ -93,17 +95,25 @@ private extension QuizView {
     
     /// This method handles all the actions that are run in the appearance of the view.
     func handleOnAppear() {
-        if case .spotlight(let tr) = externalLauncher, let translation = tr {
+        guard !onAppearAlreadyCalled else { return }
+        if case .spotlight(let action) = appLauncher,
+           case .startQuiz(let transl) = action,
+           let translation = transl {
             viewModel.request(translation: translation, in: translations)
         } else {
             viewModel.updateStatus(translations)
         }
+        onAppearAlreadyCalled = true
+        appLauncher = nil
     }
     
-    func handleOnChange(externalLauncher: ExternalLauncher?) {
-        if case .spotlight(let tr) = externalLauncher, let translation = tr {
+    func handleOnChange(appLauncher: AppLauncher?) {
+        if case .spotlight(let action) = appLauncher,
+           case .startQuiz(let transl) = action,
+           let translation = transl {
             viewModel.request(translation: translation, in: translations)
         }
+        print("APPLAUNCH: quizview - handleonchange")
     }
     
     /// Correct answers will have a color and incorrect answers another.
@@ -135,7 +145,7 @@ struct QuizView_Previews: PreviewProvider {
                     .example(viewContext: dataController.container.viewContext, input: "4", output: "04", level: 4)
                 ]
             ),
-            externalLauncher: .constant(.quickAction),
+            appLauncher: .constant(nil),
             viewModel: .init(dataController: dataController)
         )
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
