@@ -18,15 +18,6 @@ struct ContentView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
-    var quizInitialTranslation: Translation? {
-        if case .spotlight(let action) = viewModel.appLauncher,
-           case .startQuiz(let transl) = action,
-           let translation = transl {
-            return translation
-        }
-        return nil
-    }
-    
     var body: some View {
         TabView(selection: $selectedView) {
             TranslationsView(translations: $viewModel.translations, viewModel: .init(dataController: viewModel.dataController))
@@ -37,7 +28,7 @@ struct ContentView: View {
                 }
             QuizView(
                 translations: $viewModel.translations,
-                appLauncher: $viewModel.appLauncher,
+                appAction: $viewModel.appAction,
                 viewModel: .init(dataController: viewModel.dataController)
             )
             .tag(String(describing: QuizView.self))
@@ -58,7 +49,7 @@ struct ContentView: View {
                 Text("Import")
             }
         }
-        .onChange(of: viewModel.appLauncher, perform: handleAppLauncher)
+        .onChange(of: viewModel.appAction, perform: handleAppAction)
         .onAppear(perform: handleOnAppear)
         .accentColor(Color("Light Blue"))
     }
@@ -67,25 +58,30 @@ struct ContentView: View {
 // MARK: - Private methods
 
 private extension ContentView {
+    
+    /// Call this when a quiz is started, so the action is registered to be eligible as a Siri shortcut.
     func registerSiriShortcut() {
-        activity = NSUserActivity(activityType: "com.serg-ios.MyVocabulary.startQuiz")
+        activity = NSUserActivity(activityType: SiriShortcuts.startQuiz.rawValue)
         activity?.title = NSLocalizedString("Start quiz", comment: "")
         activity?.isEligibleForSearch = true
         activity?.isEligibleForPrediction = true
         activity?.becomeCurrent()
     }
     
-    func handleAppLauncher( _ appLauncher: AppLauncher? = nil) {
-        switch appLauncher {
-        case .siri, .quick, .spotlight, .widget:
+    /// Code that will run when a new `AppAction` has been launched from outside the app: Siri shortcut, Spotlight, Widget, Quick Action...
+    /// - Parameter appAction: The action performed.
+    func handleAppAction( _ appAction: AppAction? = nil) {
+        switch appAction {
+        case .startQuiz:
             selectedView = String(describing: QuizView.self)
         default:
             break
         }
     }
     
+    /// This method handles all the actions that are run in the appearance of the view.
     func handleOnAppear() {
-        handleAppLauncher(viewModel.appLauncher)
+        handleAppAction(viewModel.appAction)
         registerSiriShortcut()
     }
 }
@@ -95,7 +91,7 @@ private extension ContentView {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let googleController = (UIApplication.shared.delegate as! AppDelegate).googleSignDelegate
-        ContentView(viewModel: .init(dataController: .preview, appLauncher: nil))
+        ContentView(viewModel: .init(dataController: .preview, appAction: nil))
             .environmentObject(googleController)
     }
 }

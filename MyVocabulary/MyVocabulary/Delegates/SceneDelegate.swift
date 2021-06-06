@@ -14,11 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     /// View model of the content view, is necessary because the external launcher must be setted.
     private lazy var contentViewModel: ContentView.ViewModel = {
-        .init(dataController: dataController, appLauncher: appLauncher)
+        .init(dataController: dataController, appAction: appAction)
     }()
-    
-    var appLauncher: AppLauncher?
-    
+    /// Can be `nil` if the app is launched normally, otherwise it will contain information about the action that must be performed.
+    private var appAction: AppAction?
     /// Handles iCloud data.
     let dataController = DataController()
     /// Handles Google Sign In, spreadsheets' download and parsing.
@@ -34,12 +33,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         if let shortcutItem = connectionOptions.shortcutItem {
-            appLauncher = AppLauncher(shortcutItem.type)!
+            appAction = AppAction(shortcutItem.type)
         } else if let userActivity = connectionOptions.userActivities.first {
-            appLauncher = AppLauncher(
+            appAction = AppAction(
                 userActivity.activityType,
                 translation: translation(from: userActivity)
-            )!
+            )
         }
         let contentView = ContentView(viewModel: contentViewModel)
             .environmentObject(googleController)
@@ -68,16 +67,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         performActionFor shortcutItem: UIApplicationShortcutItem,
         completionHandler: @escaping (Bool) -> Void
     ) {
-        print("APPLAUNCH: windowScene performActionFor")
-        contentViewModel.appLauncher = AppLauncher(shortcutItem.type)!
+        contentViewModel.appAction = AppAction(shortcutItem.type)
     }
     
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        contentViewModel.appLauncher = AppLauncher(
+        contentViewModel.appAction = AppAction(
             userActivity.activityType,
             translation: translation(from: userActivity)
         )
-        print("APPLAUNCH: scene userActivity")
     }
 }
 
