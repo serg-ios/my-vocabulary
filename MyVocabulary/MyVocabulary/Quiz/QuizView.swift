@@ -39,11 +39,13 @@ struct QuizView: View {
                                 viewModel.changeLevel(to: level, with: translations)
                             }
                             .padding()
-                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .frame(maxWidth: .infinity, minHeight: 60)
                             .disabled(viewModel.notAvailableTranslations(of: level))
-                            .overlay(Circle().stroke(Color(UIColor.label), lineWidth: strokeWidth(for: level)))
+                            .overlay(Circle().stroke(Color("Light Blue"), lineWidth: strokeWidth(for: level)))
                             .minimumScaleFactor(0.5)
                             .accentColor(Color("Light Blue"))
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel(accessibilityLabelForLevelButton(with: level))
                         }
                     }
                     .padding()
@@ -105,8 +107,16 @@ struct QuizView: View {
 
 private extension QuizView {
     
+    func accessibilityLabelForLevelButton(with level: Int) -> LocalizedStringKey {
+        if viewModel.notAvailableTranslations(of: level) {
+            return "There are no level \(Int16(level)) translations"
+        } else {
+            return "Show only level \(Int16(level)) translations"
+        }
+    }
+    
     func strokeWidth(for level: Int) -> CGFloat {
-        Int16(level) == viewModel.currentLevel ? (1 / UIScreen.main.scale) : 0
+        Int16(level) == viewModel.currentLevel ? 1 : 0
     }
     
     /// This method handles all the actions that are run in the appearance of the view.
