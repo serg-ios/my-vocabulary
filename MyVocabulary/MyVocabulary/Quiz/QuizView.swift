@@ -33,6 +33,20 @@ struct QuizView: View {
                 if case .on(let questionIndex, let answerIndexes, _) = viewModel.status,
                    questionIndex < translations.count
                 {
+                    HStack {
+                        ForEach(0...Int(Translation.maxLevel), id: \.self) { level in
+                            Button("\(level)") {
+                                viewModel.changeLevel(to: level, with: translations)
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .disabled(viewModel.notAvailableTranslations(of: level))
+                            .overlay(Circle().stroke(Color(UIColor.label), lineWidth: strokeWidth(for: level)))
+                            .minimumScaleFactor(0.5)
+                            .accentColor(Color("Light Blue"))
+                        }
+                    }
+                    .padding()
                     let translation = translations[questionIndex]
                     Spacer()
                     VStack(spacing: 16) {
@@ -52,7 +66,7 @@ struct QuizView: View {
                                 .font(.title3)
                                 .foregroundColor(color(for: answer))
                                 .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 50)
-                                .minimumScaleFactor(0.1)
+                                .minimumScaleFactor(0.2)
                                 .lineLimit(1)
                         }
                     }
@@ -90,6 +104,10 @@ struct QuizView: View {
 // MARK: - Private methods
 
 private extension QuizView {
+    
+    func strokeWidth(for level: Int) -> CGFloat {
+        Int16(level) == viewModel.currentLevel ? (1 / UIScreen.main.scale) : 0
+    }
     
     /// This method handles all the actions that are run in the appearance of the view.
     func handleOnAppear() {

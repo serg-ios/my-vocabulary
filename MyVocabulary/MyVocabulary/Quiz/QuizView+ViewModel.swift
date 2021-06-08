@@ -29,8 +29,10 @@ extension QuizView {
             }
         }
         
+        @Published var currentLevel: Int16?
         @Published var status: Status = .off
         
+        private var availableLevels = Set<Int>()
         private let numberOfAnswers = 4
         private let dataController: DataController
         
@@ -40,13 +42,33 @@ extension QuizView {
         }
         
         /// Selects a new translation randomly, among all the available translations.
+        ///
+        /// When there is a current level selected, filters the translations to find only those with the specified level.
         /// - Parameter translations: The available translations among which the random translation will be chosen.
         func updateStatus(_ translations: [Translation]) {
+            // The first time, initalize the available levels' array.
+            if status == .off {
+                availableLevels = Set(translations.compactMap({ Int($0.level) }))
+            }
+            // There must be enough translations to start the quiz, otherwise the game is disabled.
             guard translations.count >= numberOfAnswers else {
                 status = .off
                 return
             }
-            let questionIndex = Int.random(in: 0..<translations.count)
+            // Filter translations if there is a current level selected.
+            var filteredTranslations = [Translation]()
+            if let level = currentLevel {
+                filteredTranslations = translations.filter({ $0.level == level })
+            }
+            // If there are no translations of the current level, the index is obtained from the unfiltered array.
+            var questionIndex: Int!
+            if filteredTranslations.isEmpty {
+                questionIndex = Int.random(in: 0..<translations.count)
+            } else {
+                questionIndex = Int.random(in: 0..<filteredTranslations.count)
+                questionIndex = translations.firstIndex(of: filteredTranslations[questionIndex])
+            }
+            // The answers must not be repeated, so Set is used instead of Array.
             var answerIndexes: Set<Int> = [questionIndex]
             while answerIndexes.count < numberOfAnswers {
                 answerIndexes.insert(Int.random(in: 0..<translations.count))
@@ -69,6 +91,8 @@ extension QuizView {
                 translations[questionIndex].decreaseLevel()
             }
             dataController.update(translations[questionIndex])
+            availableLevels = Set(translations.compactMap({ Int($0.level) }))
+            clearLevelIfNeeded(translations)
         }
         
         /// Requests a specific translation, instead of doing it randomly.
@@ -84,6 +108,38 @@ extension QuizView {
             }
             status = .on(questionIndex: questionIndex, answerIndexes: answerIndexes.shuffled(), selectedIndex: nil)
         }
+        
+        /// Determines if the translations array contains at least one translation of the level.
+        /// - Parameters:
+        ///   - level: Translation's level we are looking for.
+        /// - Returns: `true` if there are NOT translations with the specified level in the array.
+        func notAvailableTranslations(of level: Int) -> Bool {
+            !availableLevels.contains(level)
+        }
+        
+        /// Update view model's status to show only translations with the specified level.
+        /// - Parameters:
+        ///   - translations: Current array of translations that is being shown in the quiz.
+        ///   - level: Only translations with this level will be questioned in the quiz.
+        func show(_ translations: [Translation], with level: Int) {
+            currentLevel = Int16(level)
+            updateStatus(translations)
+        }
+        
+        /// Call this method after every answer, to determine if there are not more translations of the current level. In that case, set the current level to `nil`.
+        /// - Parameter translations: Array of translations in which a translation with the current level will be searched for.
+        func clearLevelIfNeeded(_ translations: [Translation]) {
+            guard let level = currentLevel, !translations.contains(where: { $0.level == level }) else { return }
+            currentLevel = nil
+        }
+        
+        func changeLevel(to level: Int, with translations: [Translation]) {
+            if Int16(level) != currentLevel {
+                show(translations, with: level)
+            } else {
+                currentLevel = nil
+                updateStatus(translations)
+            }
+        }
     }
 }
-
