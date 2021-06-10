@@ -123,6 +123,8 @@ private extension QuizView {
     func handleOnAppear() {
         if case .startQuiz(let transl, _) = appAction, let translation = transl {
             viewModel.request(translation: translation, in: translations)
+        } else if case .startQuizMinLevel = appAction {
+            viewModel.selectMinLevel(in: translations)
         } else {
             viewModel.updateStatus(translations)
         }
@@ -133,6 +135,8 @@ private extension QuizView {
     func handleAppAction( _ appAction: AppAction? = nil) {
         if case .startQuiz(let transl, _) = appAction, let translation = transl {
             viewModel.request(translation: translation, in: translations)
+        } else if case .startQuizMinLevel = appAction {
+            viewModel.selectMinLevel(in: translations)
         }
     }
     

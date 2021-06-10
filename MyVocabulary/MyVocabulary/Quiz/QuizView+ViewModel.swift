@@ -133,11 +133,26 @@ extension QuizView {
             currentLevel = nil
         }
         
+        /// If the new level is different to the currently selected, the level changes. If it's the same, the current level is set to `nil`.
+        /// - Parameters:
+        ///   - level: The new level.
+        ///   - translations: The translations that will be filtered based on the new level.
         func changeLevel(to level: Int, with translations: [Translation]) {
             if Int16(level) != currentLevel {
                 show(translations, with: level)
             } else {
                 currentLevel = nil
+                updateStatus(translations)
+            }
+        }
+        
+        /// Selects the lowest level available.
+        /// - Parameter translations: The translations of the quiz.
+        func selectMinLevel(in translations: [Translation]) {
+            let minLevel = availableLevels.min() ?? 0
+            if Int16(minLevel) != currentLevel {
+                changeLevel(to: minLevel, with: translations)
+            } else {
                 updateStatus(translations)
             }
         }

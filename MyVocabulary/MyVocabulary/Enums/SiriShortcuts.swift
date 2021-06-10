@@ -10,4 +10,5 @@ import Foundation
 /// The `String` value is the activity type of the shortcut.
 enum SiriShortcuts: String {
     case startQuiz = "com.serg-ios.MyVocabulary.startQuiz"
+    case startQuizMinLevel = "com.serg-ios.MyVocabulary.startQuizMinLevel"
 }

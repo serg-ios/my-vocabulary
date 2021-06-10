@@ -4,10 +4,19 @@
 <dict>
 	<key>NSUserActivityTypes</key>
 	<array>
+		<string>com.serg-ios.MyVocabulary.startQuizMinLevel</string>
 		<string>com.serg-ios.MyVocabulary.startQuiz</string>
 	</array>
 	<key>UIApplicationShortcutItems</key>
 	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>questionmark.square.dashed</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Difficult translations</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>MyVocabulary://startQuizMinLevel</string>
+		</dict>
 		<dict>
 			<key>UIApplicationShortcutItemIconSymbolName</key>
 			<string>gamecontroller</string>

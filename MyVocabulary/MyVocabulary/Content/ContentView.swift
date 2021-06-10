@@ -60,9 +60,18 @@ struct ContentView: View {
 private extension ContentView {
     
     /// Call this when a quiz is started, so the action is registered to be eligible as a Siri shortcut.
-    func registerSiriShortcut() {
+    func registerStartQuizSiriShortcut() {
         activity = NSUserActivity(activityType: SiriShortcuts.startQuiz.rawValue)
         activity?.title = NSLocalizedString("Start quiz", comment: "")
+        activity?.isEligibleForSearch = true
+        activity?.isEligibleForPrediction = true
+        activity?.becomeCurrent()
+    }
+    
+    /// Call this when a quiz is started, so the action is registered to be eligible as a Siri shortcut.
+    func registerStartQuizMinLevelSiriShortcut() {
+        activity = NSUserActivity(activityType: SiriShortcuts.startQuizMinLevel.rawValue)
+        activity?.title = NSLocalizedString("Start difficult translations' quiz", comment: "")
         activity?.isEligibleForSearch = true
         activity?.isEligibleForPrediction = true
         activity?.becomeCurrent()
@@ -72,7 +81,7 @@ private extension ContentView {
     /// - Parameter appAction: The action performed.
     func handleAppAction( _ appAction: AppAction? = nil) {
         switch appAction {
-        case .startQuiz:
+        case .startQuiz, .startQuizMinLevel:
             selectedView = String(describing: QuizView.self)
         default:
             break
@@ -82,7 +91,8 @@ private extension ContentView {
     /// This method handles all the actions that are run in the appearance of the view.
     func handleOnAppear() {
         handleAppAction(viewModel.appAction)
-        registerSiriShortcut()
+        registerStartQuizSiriShortcut()
+        registerStartQuizMinLevelSiriShortcut()
     }
 }
 
