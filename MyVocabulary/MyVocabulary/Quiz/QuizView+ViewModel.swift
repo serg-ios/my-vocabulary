@@ -133,6 +133,13 @@ extension QuizView {
             currentLevel = nil
         }
         
+        /// Call this method to clean make current level `nil`.
+        ///
+        /// Must be called when the quiz finishes.
+        func clearLevel() {
+            currentLevel = nil
+        }
+        
         /// If the new level is different to the currently selected, the level changes. If it's the same, the current level is set to `nil`.
         /// - Parameters:
         ///   - level: The new level.

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct QuizView: View {
     
@@ -54,6 +55,8 @@ struct QuizView: View {
                     VStack(spacing: 16) {
                         Text(translation.translationInput).font(.largeTitle).bold()
                             .lineLimit(1)
+                            .frame(maxWidth: .infinity)
+                            .minimumScaleFactor(0.1)
                         SegmentedProgressBar(level: translation.level).frame(height: 8)
                     }
                     .padding([.leading, .trailing, .bottom])
@@ -99,6 +102,7 @@ struct QuizView: View {
                 UINotificationFeedbackGenerator().notificationOccurred(.error)
             })
             .onChange(of: appAction, perform: handleAppAction)
+            .onDisappear(perform: viewModel.clearLevel)
         }
     }
 }
