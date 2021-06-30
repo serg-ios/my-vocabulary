@@ -59,6 +59,7 @@
 		79E4A0DC25F7F93000F959EA /* Bundle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4A0DB25F7F93000F959EA /* Bundle+.swift */; };
 		79E8DEB026444C00003E146F /* ContentView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E8DEAF26444C00003E146F /* ContentView+ViewModel.swift */; };
 		79E8DEBB26448822003E146F /* SpreadsheetView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E8DEBA26448822003E146F /* SpreadsheetView+ViewModel.swift */; };
+		79ED5077268CEFEC00F90E95 /* SpeakingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED5076268CEFEC00F90E95 /* SpeakingLanguage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		79E4A0DB25F7F93000F959EA /* Bundle+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+.swift"; sourceTree = "<group>"; };
 		79E8DEAF26444C00003E146F /* ContentView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+ViewModel.swift"; sourceTree = "<group>"; };
 		79E8DEBA26448822003E146F /* SpreadsheetView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpreadsheetView+ViewModel.swift"; sourceTree = "<group>"; };
+		79ED5076268CEFEC00F90E95 /* SpeakingLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakingLanguage.swift; sourceTree = "<group>"; };
 		84E72093C65429F7A9ED2215 /* Pods_MyVocabulary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyVocabulary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DECCF95D6496F01361B2A73F /* Pods-MyVocabulary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyVocabulary.release.xcconfig"; path = "Target Support Files/Pods-MyVocabulary/Pods-MyVocabulary.release.xcconfig"; sourceTree = "<group>"; };
 		DFF8EE5DA91D899760CDF957 /* Pods-MyVocabulary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyVocabulary.debug.xcconfig"; path = "Target Support Files/Pods-MyVocabulary/Pods-MyVocabulary.debug.xcconfig"; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			children = (
 				79E4A0B325F7B82200F959EA /* Main.xcdatamodeld */,
 				790F19C025FEAC9000A5A285 /* Spreadsheet.swift */,
+				79ED5076268CEFEC00F90E95 /* SpeakingLanguage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -577,6 +580,7 @@
 				7955DD472640608000465013 /* TranslationsView.swift in Sources */,
 				7955DD482640608000465013 /* TranslationView.swift in Sources */,
 				79D806D9264D3B2900576434 /* QuizView+ViewModel.swift in Sources */,
+				79ED5077268CEFEC00F90E95 /* SpeakingLanguage.swift in Sources */,
 				79250D222619E33B00E802A9 /* SolidBackgroundViewModifier.swift in Sources */,
 				79250D272619E67A00E802A9 /* SegmentedProgressBar.swift in Sources */,
 				790F19C125FEAC9000A5A285 /* Spreadsheet.swift in Sources */,

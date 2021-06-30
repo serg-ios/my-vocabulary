@@ -36,3 +36,5 @@
 "Show only level %d translations" = "Mostrar solo traducciones de nivel %d";
 "There are no level %d translations" = "No hay traducciones de nivel %d";
 "Start difficult translations' quiz" = "Empezar el test de traducciones difíciles";
+"Selected language to read translation is %@" = "El lenguaje seleccionado para leer la traducción es %@";
+"Listen" = "Escuchar";
