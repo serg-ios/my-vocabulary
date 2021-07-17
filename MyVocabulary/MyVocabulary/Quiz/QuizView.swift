@@ -26,6 +26,8 @@ struct QuizView: View {
     @StateObject private var viewModel: ViewModel
     @State private var languageIndex = 0
     
+    @State private var isDisable: Bool = false
+    
     // MARK: - Init
     
     init(
@@ -44,6 +46,39 @@ struct QuizView: View {
         NavigationView {
             ScrollView {
                 VStack {
+                    
+//                    Button(
+//                            action: {
+//                              isDisable = true
+//                              withAnimation(
+//                                .linear(duration: 1)
+//                              ) {
+//                                scale = scale - 0.1
+//                                isDisable = false
+//                              }
+//                            },
+//                            label: {
+//                              Text("Tap Me")
+//                            }
+//                          )
+//                          .disabled(
+//                            isDisable
+//                          )
+                    
+                    Button {
+                        let duration: Double = 1
+                        isDisable = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                            isDisable = false
+                        }
+                        withAnimation(.linear(duration: duration)) {
+                            scale -= 0.1
+                        }
+                    } label: {
+                        Text("Tap Me")
+                    }
+                    
+                    
                     if case .on(let questionIndex, let answerIndexes, _) = viewModel.status,
                        questionIndex < translations.count
                     {
